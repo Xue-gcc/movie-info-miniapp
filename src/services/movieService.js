@@ -6,6 +6,7 @@ import {
 	topRated,
 	upcoming
 } from '@/data/movies'
+import { DEMO_TRAILER_URL, MEDIA_API_BASE } from '@/config/media'
 
 const TMDB_BASE = 'https://api.themoviedb.org/3'
 const IMAGE_BASE = 'https://image.tmdb.org/t/p'
@@ -86,7 +87,8 @@ function mapMovie(item = {}) {
 		poster: tmdbImage(item.poster_path, 'w500'),
 		backdrop: tmdbImage(item.backdrop_path, 'w780'),
 		stills: item.images?.backdrops?.slice(0, 4).map((still) => tmdbImage(still.file_path, 'w780')) || [],
-		trailerKey: item.videos?.results?.find((video) => video.site === 'YouTube')?.key || '',
+		trailerUrl: item.trailer_url || '',
+		trailerProvider: item.trailer_provider || '',
 		tone: '#2e3731',
 		accent: '#b88650',
 		reviews: (item.reviews?.results || []).slice(0, 5).map((review) => ({
@@ -162,6 +164,68 @@ export async function getMovieDetail(movieId) {
 	} catch (error) {
 		console.warn('Movie detail request failed, using local data', error)
 		return localMovie || null
+	}
+}
+
+function normalizeTrailer(data, fallbackPoster = '') {
+	const payload = data?.data || data || {}
+	const playUrl =
+		payload.playUrl ||
+		payload.play_url ||
+		payload.videoUrl ||
+		payload.video_url ||
+		payload.url ||
+		''
+	if (!playUrl) return null
+	return {
+		playUrl,
+		poster: payload.poster || payload.cover || fallbackPoster,
+		provider: payload.provider || '国内媒体服务',
+		duration: Number(payload.duration || 0),
+		isDemo: false
+	}
+}
+
+function requestDomesticTrailer(movieId) {
+	if (!MEDIA_API_BASE) return Promise.resolve(null)
+
+	return new Promise((resolve, reject) => {
+		uni.request({
+			url: `${MEDIA_API_BASE}/movies/${movieId}/trailer`,
+			method: 'GET',
+			header: {
+				Accept: 'application/json'
+			},
+			timeout: 12000,
+			success(response) {
+				if (response.statusCode >= 200 && response.statusCode < 300) {
+					resolve(normalizeTrailer(response.data))
+					return
+				}
+				reject(new Error(`Trailer request failed: ${response.statusCode}`))
+			},
+			fail(error) {
+				reject(error)
+			}
+		})
+	})
+}
+
+export async function getMovieTrailer(movieId, fallbackPoster = '') {
+	const localMovie = findMovieById(movieId)
+	try {
+		const domesticTrailer = await requestDomesticTrailer(movieId)
+		if (domesticTrailer) return domesticTrailer
+	} catch (error) {
+		console.warn('Domestic trailer service unavailable, using demo video', error)
+	}
+
+	return {
+		playUrl: localMovie?.trailerUrl || DEMO_TRAILER_URL,
+		poster: localMovie?.trailerPoster || fallbackPoster || localMovie?.backdrop || '',
+		provider: localMovie?.trailerProvider || '国内 CDN 演示视频',
+		duration: 0,
+		isDemo: !localMovie?.trailerUrl
 	}
 }
 

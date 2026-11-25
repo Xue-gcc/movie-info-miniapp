@@ -18,7 +18,6 @@ const rawMovies = [
 			'保罗·厄崔迪与契妮和弗雷曼人并肩作战，在复仇与预言之间寻找自己的道路。面对哈克南家族与帝国势力，他必须作出改变宇宙命运的选择。',
 		posterPath: '/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg',
 		backdropPath: '/xOMo8BRK7PfcJv9JCnx7s5hj0PX.jpg',
-		trailerKey: 'Way9Dexny3w',
 		tone: '#6a4a31',
 		accent: '#c89a5b',
 		cast: [
@@ -45,7 +44,6 @@ const rawMovies = [
 			'原子弹之父罗伯特·奥本海默站在科学、权力与道德的交汇处。影片以他的视角回望改变世界的那次选择，以及选择之后漫长的代价。',
 		posterPath: '/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg',
 		backdropPath: '/fm6KqXpk3M2HVveHwCrBSSBaO0V.jpg',
-		trailerKey: 'uYPbbksJxIg',
 		tone: '#3d2923',
 		accent: '#c66a38',
 		cast: [
@@ -72,7 +70,6 @@ const rawMovies = [
 			'莱莉进入青春期，情绪总部迎来一批意料之外的新成员。焦虑、羡慕、尴尬和无聊登场，让原本熟悉的小世界重新寻找平衡。',
 		posterPath: '/vpnVM9B6NMmQpWeZvzLvDESb2QY.jpg',
 		backdropPath: '/6Pm2G8xZ5s4tYhYVJXgL7s2dK3v.jpg',
-		trailerKey: 'LEjhY15eCx0',
 		tone: '#755b8f',
 		accent: '#efa847',
 		cast: [
@@ -99,7 +96,6 @@ const rawMovies = [
 			'迈尔斯穿越多元宇宙，与格温及蜘蛛联盟相遇。当所有蜘蛛侠都相信同一套规则时，他决定用自己的方式重新定义英雄。',
 		posterPath: '/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg',
 		backdropPath: '/4HodYYKEIsGOdinkGi2Ucz6X9i0.jpg',
-		trailerKey: 'cqGjhVJWtEg',
 		tone: '#1d4e76',
 		accent: '#e84472',
 		cast: [
@@ -126,7 +122,6 @@ const rawMovies = [
 			'地球逐渐失去适合生存的环境，一群宇航员穿过虫洞寻找人类的新家园。跨越星系的旅程，最终回到父女之间最朴素的牵挂。',
 		posterPath: '/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg',
 		backdropPath: '/xJHokMbljvjADYdit5fK5VQsXEG.jpg',
-		trailerKey: 'zSWdZVtXT7E',
 		tone: '#232b31',
 		accent: '#ad8d57',
 		cast: [
@@ -153,7 +148,6 @@ const rawMovies = [
 			'住在半地下室的一家人逐步进入富裕家庭的生活，空间、气味与阶层的缝隙慢慢显形。一次偶然事件让精心维持的平衡彻底崩塌。',
 		posterPath: '/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg',
 		backdropPath: '/TU9NIjwzjoKPwQHoHshkFcQUCG.jpg',
-		trailerKey: '5xH0HfJHsaY',
 		tone: '#33423a',
 		accent: '#b9a46d',
 		cast: [
@@ -180,7 +174,6 @@ const rawMovies = [
 			'少女千寻误入神灵世界，为了救回父母，她在汤屋工作并一点点学会勇敢。名字、记忆和善意，成为她穿过迷雾的线索。',
 		posterPath: '/39wmItIWsg5sZMyRUHLkWBcuVCM.jpg',
 		backdropPath: '/Ab8mkHmkYADjU7wQiOkia9BzGvS.jpg',
-		trailerKey: 'ByXuk9QqQkk',
 		tone: '#234c52',
 		accent: '#d6a14a',
 		cast: [
@@ -207,7 +200,6 @@ const rawMovies = [
 			'银行家安迪被误判入狱，在肖申克监狱度过漫长岁月。他与瑞德建立友谊，也始终用阅读、音乐和希望守护内心自由。',
 		posterPath: '/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg',
 		backdropPath: '/kXfqcdQKsToO0OUXHcrrNCHDBzO.jpg',
-		trailerKey: '6hB3S9bIaco',
 		tone: '#4a3a2a',
 		accent: '#b48745',
 		cast: [
@@ -234,7 +226,6 @@ const rawMovies = [
 			'洗衣店老板娘伊芙琳突然被卷入多元宇宙危机。她必须连接无数版本的自己，也在混乱中重新理解女儿、丈夫与选择。',
 		posterPath: '/w3LxiVYdWWRvEVdn5RYq6jIqkb1.jpg',
 		backdropPath: '/ss0Os3uWJfQAENILHZUdX8Tt1OC.jpg',
-		trailerKey: 'wxN1T1uxQ2g',
 		tone: '#3c3346',
 		accent: '#e98c65',
 		cast: [
@@ -261,7 +252,6 @@ const rawMovies = [
 			'哥谭市连续发生针对权势人物的谋杀，蝙蝠侠与猫女、戈登一起追查谜语人的线索。复仇者的身份开始接受真正的考验。',
 		posterPath: '/74xTEgt7R36Fpooo50r9T25onhq.jpg',
 		backdropPath: '/b0PlSFdDwbyK0cf5RxwDpaOJQvQ.jpg',
-		trailerKey: 'mqqft2x_Aa4',
 		tone: '#241b24',
 		accent: '#9f332f',
 		cast: [
@@ -288,7 +278,6 @@ const rawMovies = [
 			'被科学家复活的贝拉以孩童般的心智重新认识世界。她离开伦敦，在旅行、欲望和知识的碰撞中塑造自己的自由。',
 		posterPath: '/kCGlIMHnOm8JPXq3rXM6c5wMxcT.jpg',
 		backdropPath: '/9S4r5v7zJvH0a0wN5dUKjQ8mZ0P.jpg',
-		trailerKey: 'RlbR5N6veqw',
 		tone: '#5e2b39',
 		accent: '#dc9f5a',
 		cast: [
@@ -315,7 +304,6 @@ const rawMovies = [
 			'机器人萝斯坠落到一座无人岛，在严酷自然中学习生存，也意外成为小雁的妈妈。她必须用程序之外的方式理解爱和告别。',
 		posterPath: '/wTnV3PCVW5O92JMrFvvrRcV39RU.jpg',
 		backdropPath: '/9xG8pS8fJ8r3WQl2AhB7eVJ8QzS.jpg',
-		trailerKey: '67vbA5ZJdKQ',
 		tone: '#2d5448',
 		accent: '#d39b45',
 		cast: [
@@ -342,7 +330,6 @@ const rawMovies = [
 			'金刚在地心世界寻找族群，哥斯拉则在地表积蓄力量。新的威胁浮出水面，两位巨兽必须再次并肩迎战。',
 		posterPath: '/z1p34vh7dEOnLDmyCrlUVLuoDzd.jpg',
 		backdropPath: '/xRd1h9qP6Q6G8q1x9n4hV6u5Y7j.jpg',
-		trailerKey: 'lV1OOlGwExM',
 		tone: '#3c2a24',
 		accent: '#d1763b',
 		cast: [
@@ -369,7 +356,6 @@ const rawMovies = [
 			'年轻时的弗瑞奥萨被掳离家园，在荒原中穿越不同势力，只为一件事：找到回家的路。',
 		posterPath: '/iADOJ8Zymht2JPMoy3R7xceZprc.jpg',
 		backdropPath: '/wNAhuOZ3Zf84jCIlrcI6JhgmY5q.jpg',
-		trailerKey: 'XJMuhwVlca4',
 		tone: '#5b3b29',
 		accent: '#d77c38',
 		cast: [
@@ -396,7 +382,6 @@ const rawMovies = [
 			'一名作家被指控谋杀丈夫，失明的儿子成为案件关键证人。法庭试图还原一场婚姻，却让每个人的叙述都变得可疑。',
 		posterPath: '/kQs6keheMwCxJxrzV83VUwFtHkB.jpg',
 		backdropPath: '/9YQyK5Jq8GqxNq4mZ4qY5j6R4sT.jpg',
-		trailerKey: 'Z3XlQ6w4s0Q',
 		tone: '#4b4944',
 		accent: '#c6b97c',
 		cast: [
@@ -423,7 +408,6 @@ const rawMovies = [
 			'东京公厕清洁工平山过着简单而规律的生活。他听磁带、拍树影、读书，在微小的日常里找到自己的节奏。',
 		posterPath: '/i8f3b7q5v2cJ2xJ0c6R8m3Q4m9B.jpg',
 		backdropPath: '/5wY4b6m7zX2V9Jk3aP8nQ1sT6rE.jpg',
-		trailerKey: '0R3nQ6cV8aA',
 		tone: '#405047',
 		accent: '#d9b85e',
 		cast: [
@@ -450,7 +434,6 @@ const rawMovies = [
 			'阿宝被要求选出新的神龙大侠，同时必须阻止变色龙女王复活旧日反派。他第一次真正面对“成为师父”这件事。',
 		posterPath: '/kDp1vUBnMpe8ak4rjgl3cLELqjU.jpg',
 		backdropPath: '/1q8H3XQk4xY5B6n8K7p2C9d1V0s.jpg',
-		trailerKey: '1g9r0s4z2c8',
 		tone: '#4e4631',
 		accent: '#d2aa3e',
 		cast: [
@@ -465,6 +448,8 @@ const rawMovies = [
 
 export const movies = rawMovies.map((movie, index) => ({
 	...movie,
+	trailerUrl: '',
+	trailerProvider: '',
 	poster: image(movie.posterPath, 'w500'),
 	backdrop: image(movie.backdropPath, 'w780'),
 	stills: [

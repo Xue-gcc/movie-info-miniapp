@@ -75,6 +75,37 @@ uni.setStorageSync('tmdb_api_key', '你的 TMDB v3 API Key')
 
 公开 H5 中的 Key 会出现在前端构建产物里，仅适合课程和非商业用途。需要保密时应增加服务端代理。
 
+## 国内预告片接口
+
+配置 `.env.local`：
+
+```text
+VITE_MEDIA_API_BASE=https://media-api.example.com/api
+```
+
+详情页会请求：
+
+```text
+GET {VITE_MEDIA_API_BASE}/movies/{movieId}/trailer
+```
+
+接口返回示例：
+
+```json
+{
+	"playUrl": "https://video.example.com/trailers/movie.mp4",
+	"poster": "https://video.example.com/trailers/movie-cover.jpg",
+	"provider": "腾讯云点播",
+	"duration": 150
+}
+```
+
+页面使用微信小程序原生 `<video>` 播放，不再跳转 YouTube。未配置国内媒体接口时，
+项目会使用国内 CDN 演示视频，并在播放器中标记为“演示片段”。
+
+正式使用自有视频时，需要在微信公众平台配置对应的 `request` 和
+`downloadFile` 合法域名。
+
 ## 微信小程序
 
 生成微信小程序构建：

@@ -187,6 +187,48 @@
 				</button>
 			</view>
 
+			<view v-if="showTrailer" class="trailer-mask" @tap="closeTrailer">
+				<view class="trailer-dialog" @tap.stop>
+					<view class="trailer-dialog-head">
+						<view class="trailer-dialog-copy">
+							<text class="trailer-dialog-kicker">DOMESTIC TRAILER</text>
+							<text class="trailer-dialog-title">{{ movie.title }}</text>
+						</view>
+						<button class="trailer-close pressable" aria-label="关闭预告片" @tap="closeTrailer">
+							<view class="trailer-close-line first" />
+							<view class="trailer-close-line second" />
+						</button>
+					</view>
+
+					<view class="trailer-player-shell">
+						<video
+							v-if="trailerData?.playUrl"
+							id="movieTrailer"
+							class="trailer-video"
+							:src="trailerData.playUrl"
+							:poster="trailerData.poster || movie.backdrop"
+							controls
+							autoplay
+							object-fit="contain"
+							@error="handleTrailerError"
+						/>
+						<view v-else-if="trailerLoading" class="trailer-loading">
+							<view class="trailer-loading-ring" />
+							<text>正在连接国内视频服务</text>
+						</view>
+						<view v-else class="trailer-error">
+							<text class="trailer-error-title">预告片暂时无法播放</text>
+							<text class="trailer-error-copy">{{ trailerError || '请稍后重试' }}</text>
+						</view>
+					</view>
+
+					<view class="trailer-dialog-foot">
+						<text class="trailer-provider">{{ trailerData?.provider || '国内媒体服务' }}</text>
+						<text v-if="trailerData?.isDemo" class="trailer-demo-tag">演示片段</text>
+					</view>
+				</view>
+			</view>
+
 			<view v-if="showReviewSheet" class="sheet-mask" @tap="closeReviewSheet">
 				<view class="review-sheet" @tap.stop>
 					<view class="sheet-handle" />
@@ -245,7 +287,7 @@
 <script setup>
 	import { computed, ref } from 'vue'
 	import { onLoad, onShow } from '@dcloudio/uni-app'
-	import { getMovieDetail } from '@/services/movieService'
+	import { getMovieDetail, getMovieTrailer } from '@/services/movieService'
 	import {
 		addReview,
 		getReviewsByMovie,
@@ -264,6 +306,10 @@
 	const reviewText = ref('')
 	const reviewRating = ref(4)
 	const userReviews = ref([])
+	const showTrailer = ref(false)
+	const trailerLoading = ref(false)
+	const trailerData = ref(null)
+	const trailerError = ref('')
 
 	const heroBackground = computed(
 		() =>
@@ -304,23 +350,33 @@
 		})
 	}
 
-	function playTrailer() {
-		if (!movie.value?.trailerKey) {
-			uni.showToast({ title: '预告片暂未收录', icon: 'none' })
-			return
-		}
-		const url = `https://www.youtube.com/watch?v=${movie.value.trailerKey}`
-		// #ifdef H5
-		window.open(url, '_blank', 'noopener,noreferrer')
-		// #endif
-		// #ifndef H5
-		uni.setClipboardData({
-			data: url,
-			success() {
-				uni.showToast({ title: '预告片链接已复制', icon: 'none' })
+	async function playTrailer() {
+		if (!movie.value?.id || trailerLoading.value) return
+		showTrailer.value = true
+		trailerLoading.value = true
+		trailerData.value = null
+		trailerError.value = ''
+		try {
+			trailerData.value = await getMovieTrailer(movie.value.id, movie.value.backdrop)
+			if (!trailerData.value?.playUrl) {
+				trailerError.value = '国内视频服务没有返回播放地址'
 			}
-		})
-		// #endif
+		} catch (error) {
+			trailerError.value = '预告片加载失败，请稍后重试'
+		} finally {
+			trailerLoading.value = false
+		}
+	}
+
+	function closeTrailer() {
+		showTrailer.value = false
+		trailerLoading.value = false
+		trailerData.value = null
+		trailerError.value = ''
+	}
+
+	function handleTrailerError() {
+		trailerError.value = '视频加载失败，请检查网络或视频域名配置'
 	}
 
 	function openReviewSheet() {
@@ -949,6 +1005,162 @@
 		border-top: 3rpx solid currentColor;
 		border-right: 3rpx solid currentColor;
 		transform: rotate(45deg);
+	}
+
+	.trailer-mask {
+		position: fixed;
+		z-index: 60;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 24rpx;
+		background: rgba(10, 9, 8, 0.82);
+		backdrop-filter: blur(8px);
+	}
+
+	.trailer-dialog {
+		width: 100%;
+		max-width: 720px;
+		overflow: hidden;
+		border: 1rpx solid rgba(255, 248, 236, 0.16);
+		border-radius: 8px;
+		background: #151412;
+		color: #fff8ec;
+	}
+
+	.trailer-dialog-head {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 24rpx;
+		padding: 26rpx 26rpx 22rpx;
+	}
+
+	.trailer-dialog-copy {
+		display: flex;
+		flex-direction: column;
+		gap: 7rpx;
+		min-width: 0;
+	}
+
+	.trailer-dialog-kicker {
+		font-size: 17rpx;
+		font-weight: 700;
+		color: var(--gold);
+	}
+
+	.trailer-dialog-title {
+		font-family: "Songti SC", "STSong", "Noto Serif SC", serif;
+		font-size: 38rpx;
+		line-height: 1.2;
+		font-weight: 700;
+	}
+
+	.trailer-close {
+		position: relative;
+		width: 58rpx;
+		height: 58rpx;
+		flex-shrink: 0;
+		border: 1rpx solid rgba(255, 248, 236, 0.22);
+		border-radius: 50%;
+		background: rgba(255, 248, 236, 0.06);
+	}
+
+	.trailer-close-line {
+		position: absolute;
+		left: 17rpx;
+		top: 28rpx;
+		width: 24rpx;
+		height: 2rpx;
+		background: #fff8ec;
+	}
+
+	.trailer-close-line.first {
+		transform: rotate(45deg);
+	}
+
+	.trailer-close-line.second {
+		transform: rotate(-45deg);
+	}
+
+	.trailer-player-shell {
+		position: relative;
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		overflow: hidden;
+		background: #050504;
+	}
+
+	.trailer-video {
+		width: 100%;
+		height: 100%;
+		background: #050504;
+	}
+
+	.trailer-loading,
+	.trailer-error {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 18rpx;
+		width: 100%;
+		height: 100%;
+		padding: 30rpx;
+		text-align: center;
+		color: rgba(255, 248, 236, 0.66);
+		font-size: 22rpx;
+	}
+
+	.trailer-loading-ring {
+		width: 46rpx;
+		height: 46rpx;
+		border: 4rpx solid rgba(255, 248, 236, 0.18);
+		border-top-color: var(--gold);
+		border-radius: 50%;
+		animation: trailer-spin 800ms linear infinite;
+	}
+
+	@keyframes trailer-spin {
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	.trailer-error-title {
+		font-family: "Songti SC", "STSong", serif;
+		font-size: 30rpx;
+		font-weight: 700;
+		color: #fff8ec;
+	}
+
+	.trailer-error-copy {
+		font-size: 20rpx;
+		line-height: 1.6;
+	}
+
+	.trailer-dialog-foot {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 20rpx;
+		min-height: 78rpx;
+		padding: 0 26rpx;
+		border-top: 1rpx solid rgba(255, 248, 236, 0.1);
+	}
+
+	.trailer-provider {
+		font-size: 19rpx;
+		color: rgba(255, 248, 236, 0.56);
+	}
+
+	.trailer-demo-tag {
+		padding: 7rpx 12rpx;
+		border: 1rpx solid rgba(212, 154, 47, 0.46);
+		border-radius: 8px;
+		font-size: 16rpx;
+		color: var(--gold);
 	}
 
 	.sheet-mask {
