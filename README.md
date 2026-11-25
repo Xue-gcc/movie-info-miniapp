@@ -101,10 +101,31 @@ GET {VITE_MEDIA_API_BASE}/movies/{movieId}/trailer
 ```
 
 页面使用微信小程序原生 `<video>` 播放，不再跳转 YouTube。未配置国内媒体接口时，
-项目会使用国内 CDN 演示视频，并在播放器中标记为“演示片段”。
+页面会显示“预告片暂未收录”。如需播放演示视频，可以显式配置
+`VITE_DEMO_TRAILER_URL`。
 
 正式使用自有视频时，需要在微信公众平台配置对应的 `request` 和
 `downloadFile` 合法域名。
+
+### uniCloud 云函数
+
+项目已内置：
+
+```text
+uniCloud-alipay/cloudfunctions/getMovieTrailer
+uniCloud-alipay/database/movie_trailers.schema.json
+```
+
+使用前需要：
+
+1. 在 HBuilderX 中登录 DCloud 账号。
+2. 创建并绑定 uniCloud 服务空间。
+3. 上传 `getMovieTrailer` 云函数。
+4. 上传 `movie_trailers` 数据表结构。
+5. 在集合中录入每部电影的真实国内预告片记录。
+
+前端会优先调用 `uniCloud.callFunction`；云函数不可用时，再尝试
+`VITE_MEDIA_API_BASE` 指定的国内媒体接口。
 
 ## 微信小程序
 

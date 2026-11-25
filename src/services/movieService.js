@@ -211,19 +211,51 @@ function requestDomesticTrailer(movieId) {
 	})
 }
 
+async function requestCloudTrailer(movieId) {
+	if (typeof uniCloud === 'undefined' || typeof uniCloud.callFunction !== 'function') {
+		return null
+	}
+
+	const response = await uniCloud.callFunction({
+		name: 'getMovieTrailer',
+		data: {
+			movieId: String(movieId)
+		}
+	})
+	const result = response.result || {}
+	if (result.code === 0) {
+		return normalizeTrailer(result.data)
+	}
+	if (result.code === 404) {
+		return null
+	}
+	throw new Error(result.message || 'Cloud trailer request failed')
+}
+
 export async function getMovieTrailer(movieId, fallbackPoster = '') {
 	const localMovie = findMovieById(movieId)
+	try {
+		const cloudTrailer = await requestCloudTrailer(movieId)
+		if (cloudTrailer) return cloudTrailer
+	} catch (error) {
+		console.warn('uniCloud trailer function unavailable', error)
+	}
+
 	try {
 		const domesticTrailer = await requestDomesticTrailer(movieId)
 		if (domesticTrailer) return domesticTrailer
 	} catch (error) {
-		console.warn('Domestic trailer service unavailable, using demo video', error)
+		console.warn('Domestic trailer service unavailable', error)
+	}
+
+	if (!localMovie?.trailerUrl && !DEMO_TRAILER_URL) {
+		return null
 	}
 
 	return {
 		playUrl: localMovie?.trailerUrl || DEMO_TRAILER_URL,
 		poster: localMovie?.trailerPoster || fallbackPoster || localMovie?.backdrop || '',
-		provider: localMovie?.trailerProvider || '国内 CDN 演示视频',
+		provider: localMovie?.trailerProvider || '国内 CDN',
 		duration: 0,
 		isDemo: !localMovie?.trailerUrl
 	}

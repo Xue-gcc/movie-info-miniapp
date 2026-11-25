@@ -1,0 +1,50 @@
+{
+	"bsonType": "object",
+	"required": ["movieId", "playUrl"],
+	"permission": {
+		"read": false,
+		"create": false,
+		"update": false,
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "数据库 ID"
+		},
+		"movieId": {
+			"bsonType": "string",
+			"title": "电影 ID",
+			"trim": "both"
+		},
+		"title": {
+			"bsonType": "string",
+			"title": "电影名称"
+		},
+		"playUrl": {
+			"bsonType": "string",
+			"title": "国内播放地址",
+			"trim": "both"
+		},
+		"poster": {
+			"bsonType": "string",
+			"title": "视频封面地址"
+		},
+		"provider": {
+			"bsonType": "string",
+			"title": "视频来源"
+		},
+		"duration": {
+			"bsonType": "int",
+			"title": "时长（秒）",
+			"minimum": 0
+		},
+		"enabled": {
+			"bsonType": "bool",
+			"title": "是否启用"
+		},
+		"updatedAt": {
+			"bsonType": "timestamp",
+			"title": "更新时间"
+		}
+	}
+}
