@@ -87,4 +87,16 @@ uni.setStorageSync('tmdb_api_key', '你的 TMDB v3 API Key')
 
 ## 当前状态
 
-源码和 H5 本地构建属于开发准备阶段，尚未执行 GitHub Pages 部署。
+项目已部署到 GitHub Pages：
+
+```text
+https://xue-gcc.github.io/movie-info-miniapp/
+```
+
+GitHub 仓库：
+
+```text
+https://github.com/Xue-gcc/movie-info-miniapp
+```
+
+Pages 发布源为 `gh-pages` 分支根目录。
