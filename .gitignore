@@ -1,0 +1,12 @@
+unpackage/
+dist/
+node_modules/
+.hbuilderx/
+.DS_Store
+*.log
+.env
+.env.local
+github-hosts-backup.txt
+github-hosts-fix.log
+scripts/fix-github-hosts.ps1
+scripts/github-proxy.mjs

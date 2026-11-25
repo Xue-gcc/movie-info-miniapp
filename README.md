@@ -1,0 +1,90 @@
+# 银幕电影资讯小程序
+
+基于 Vue 3 与 uni-app 的电影资讯项目，覆盖首页、片库、搜索、电影详情和个人中心。
+
+## 已实现功能
+
+- 首页热映轮播、正在热映、趋势榜和即将上映片单
+- 片库类型、年代、评分筛选，网格/列表切换和分页加载
+- 电影详情、剧情、演职员、预告片入口、剧照和短评
+- 收藏、浏览历史、本地短评和数据清理
+- TMDB API 数据层，以及无 Key 时可运行的本地演示数据
+- 微信小程序与 H5 共用页面和组件
+
+## 目录结构
+
+```text
+components/          通用组件
+data/                本地电影数据
+pages/               页面
+services/            TMDB 数据服务
+styles/              全局视觉样式
+utils/               本地存储和格式化工具
+static/              静态资源
+```
+
+## 本地运行
+
+### HBuilderX
+
+1. 使用 HBuilderX 打开项目目录。
+2. 运行到浏览器即可预览 H5。
+3. 运行到微信开发者工具即可调试小程序。
+
+也可以使用标准 CLI：
+
+```powershell
+npm run dev:h5
+```
+
+### 构建 H5
+
+执行标准生产构建：
+
+```powershell
+npm run build:h5
+```
+
+构建结果位于：
+
+```text
+unpackage/dist/build/h5
+```
+
+在 HBuilderX 中也可以选择“发行 -> 网站-H5手机版”。
+
+HBuilderX 命令行发行方式：
+
+```powershell
+& "D:\Users\Administrator\Desktop\HBuilderX\cli.exe" publish web --project "D:\Users\Administrator\Desktop\codex_work\movie-info-miniapp" --webTitle "银幕电影资讯"
+```
+
+## TMDB 配置
+
+项目默认读取本地演示数据。配置 Key 后会自动优先请求 TMDB：
+
+1. 复制 `.env.example` 为 `.env.local`。
+2. 填写 `VITE_TMDB_API_KEY`。
+3. 重新构建 H5 或重新运行项目。
+
+开发阶段也可以在 HBuilderX 控制台执行：
+
+```js
+uni.setStorageSync('tmdb_api_key', '你的 TMDB v3 API Key')
+```
+
+公开 H5 中的 Key 会出现在前端构建产物里，仅适合课程和非商业用途。需要保密时应增加服务端代理。
+
+## 部署路径
+
+`manifest.json` 已按 GitHub 仓库名 `movie-info-miniapp` 配置：
+
+```text
+/movie-info-miniapp/
+```
+
+如果 GitHub 仓库名不同，需要同步修改 `h5.router.base` 和 `h5.publicPath`。
+
+## 当前状态
+
+源码和 H5 本地构建属于开发准备阶段，尚未执行 GitHub Pages 部署。
