@@ -91,14 +91,14 @@ dist/build/mp-weixin
 
 使用微信开发者工具导入该目录即可在微信小程序模拟器中预览。
 
-仓库当前为本地预览使用测试 AppID：
+当前微信小程序 AppID：
 
 ```text
-touristappid
+wxb5004cac1abf9727
 ```
 
-测试 AppID 不能生成线上预览码或上传。正式预览和发布前，需要将
-`src/manifest.json` 中的 `mp-weixin.appid` 替换为真实微信小程序 AppID。
+如需切换到其他微信小程序，请同步修改 `src/manifest.json` 中的
+`mp-weixin.appid`。
 
 ## 部署路径
 

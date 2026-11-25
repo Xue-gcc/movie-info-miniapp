@@ -10,3 +10,6 @@ github-hosts-backup.txt
 github-hosts-fix.log
 scripts/fix-github-hosts.ps1
 scripts/github-proxy.mjs
+wechat-preview.json
+wechat-preview.png
+wechat-upload.json
