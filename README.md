@@ -75,6 +75,31 @@ uni.setStorageSync('tmdb_api_key', '你的 TMDB v3 API Key')
 
 公开 H5 中的 Key 会出现在前端构建产物里，仅适合课程和非商业用途。需要保密时应增加服务端代理。
 
+## 微信小程序
+
+生成微信小程序构建：
+
+```powershell
+npm run build:mp-weixin
+```
+
+构建结果位于：
+
+```text
+dist/build/mp-weixin
+```
+
+使用微信开发者工具导入该目录即可在微信小程序模拟器中预览。
+
+仓库当前为本地预览使用测试 AppID：
+
+```text
+touristappid
+```
+
+测试 AppID 不能生成线上预览码或上传。正式预览和发布前，需要将
+`src/manifest.json` 中的 `mp-weixin.appid` 替换为真实微信小程序 AppID。
+
 ## 部署路径
 
 `manifest.json` 已按 GitHub 仓库名 `movie-info-miniapp` 配置：
